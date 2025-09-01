@@ -1,5 +1,7 @@
+import { Injectable } from '@nestjs/common';
 import { User } from '../model/user.entity';
 
+@Injectable()
 export class UserRepository {
   private users: User[] = [];
   private nextId = 1;
