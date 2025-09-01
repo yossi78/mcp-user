@@ -19,7 +19,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"operation\": \"create\",\n  \"payload\": {\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"age\": 30,\n    \"birthday\": \"1995-01-01\"\n  }\n}"
+					"raw": "{\n  \"operation\": \"create\",\n  \"payload\": {\n    \"firstName\": \"Yossi\",\n    \"lastName\": \"Tal\",\n    \"age\": 47,\n    \"birthday\": \"1978-09-01\"\n  }\n}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/users/mcp",
@@ -48,7 +48,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"operation\": \"create\",\n  \"payload\": {\n    \"firstName\": \"David\",\n    \"lastName\": \"Cohen\",\n    \"age\": 40,\n    \"birthday\": \"2004-05-18\"\n  }\n}"
+					"raw": "{\n  \"operation\": \"create\",\n  \"payload\": {\n    \"firstName\": \"Roei\",\n    \"lastName\": \"Sabag\",\n    \"age\": 40,\n    \"birthday\": \"1985-05-01\"\n  }\n}"
 				},
 				"url": {
 					"raw": "http://localhost:3000/users/mcp",
@@ -90,7 +90,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/users/2",
+					"raw": "http://localhost:3000/users/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -98,7 +98,7 @@
 					"port": "3000",
 					"path": [
 						"users",
-						"2"
+						"1"
 					]
 				}
 			},
@@ -119,7 +119,7 @@
 					"raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"age\": 28,\n  \"birthday\": \"1997-02-02\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:3000/users/2",
+					"raw": "http://localhost:3000/users/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -127,7 +127,7 @@
 					"port": "3000",
 					"path": [
 						"users",
-						"2"
+						"1"
 					]
 				}
 			},
