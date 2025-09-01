@@ -26,9 +26,34 @@ export class UserService {
     return this.repo.delete(id);
   }
 
-  // MCP placeholder for AI tools
+  // MCP endpoint with real CRUD logic
   mcpCrudOperation(operation: string, payload: any): any {
-    // Implement MCP logic here
-    return { operation, payload };
+    switch (operation) {
+      case 'create':
+        return this.create(payload);
+      case 'read':
+        if (payload && payload.id !== undefined) {
+          const user = this.getById(Number(payload.id));
+          if (!user) return { error: `The user with id of ${payload.id} does not exists` };
+          return user;
+        }
+        return this.getAll();
+      case 'update':
+        if (payload && payload.id !== undefined) {
+          const updated = this.update(Number(payload.id), payload);
+          if (!updated) return { error: `The user with id of ${payload.id} does not exists` };
+          return updated;
+        }
+        return { error: 'Missing id for update' };
+      case 'delete':
+        if (payload && payload.id !== undefined) {
+          const success = this.delete(Number(payload.id));
+          if (!success) return { error: `The user with id of ${payload.id} does not exists` };
+          return { success };
+        }
+        return { error: 'Missing id for delete' };
+      default:
+        return { error: 'Unknown operation' };
+    }
   }
 }
