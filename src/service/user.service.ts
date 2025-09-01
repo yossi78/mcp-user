@@ -29,6 +29,27 @@ export class UserService {
   // MCP endpoint with real CRUD logic
   mcpCrudOperation(operation: string, payload: any): any {
     switch (operation) {
+      case 'capabilities':
+        return {
+          capabilities: {
+            create: {
+              description: 'Create a new user',
+              payload: { firstName: 'string', lastName: 'string', age: 'number', birthday: 'YYYY-MM-DD' }
+            },
+            read: {
+              description: 'Get all users or a user by id',
+              payload: { id: 'number (optional)' }
+            },
+            update: {
+              description: 'Update an existing user',
+              payload: { id: 'number', firstName: 'string', lastName: 'string', age: 'number', birthday: 'YYYY-MM-DD' }
+            },
+            delete: {
+              description: 'Delete a user by id',
+              payload: { id: 'number' }
+            }
+          }
+        };
       case 'create':
         return this.create(payload);
       case 'read':
