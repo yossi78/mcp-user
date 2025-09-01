@@ -1,5 +1,5 @@
-import { User } from './user.entity';
-import { UserRepository } from './user.repository';
+import { User } from '../model/user.entity';
+import { UserRepository } from '../data-layer/user.repository';
 
 export class UserService {
   constructor(private readonly repo: UserRepository) {}

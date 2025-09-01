@@ -1,4 +1,4 @@
-import { User } from './user.entity';
+import { User } from '../model/user.entity';
 
 export class UserRepository {
   private users: User[] = [];
