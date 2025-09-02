@@ -29,6 +29,47 @@ export class UserService {
   // MCP endpoint with real CRUD logic
   mcpCrudOperation(operation: string, payload: any): any {
     switch (operation) {
+      case 'initialize':
+        return {
+          result: 'ok',
+          capabilities: {
+            create: {
+              description: 'Create a new user',
+              payload: { firstName: 'string', lastName: 'string', age: 'number', birthday: 'YYYY-MM-DD' }
+            },
+            read: {
+              description: 'Get all users or a user by id',
+              payload: { id: 'number (optional)' }
+            },
+            update: {
+              description: 'Update an existing user',
+              payload: { id: 'number', firstName: 'string', lastName: 'string', age: 'number', birthday: 'YYYY-MM-DD' }
+            },
+            delete: {
+              description: 'Delete a user by id',
+              payload: { id: 'number' }
+            }
+          },
+          protocolVersion: payload && payload.protocolVersion ? payload.protocolVersion : '2025-06-18',
+          clientInfo: payload && payload.clientInfo ? payload.clientInfo : undefined
+        };
+      case 'notifications/initialized':
+        return { result: 'ok' };
+      case 'tools/list':
+        return { result: 'ok', tools: [
+          { name: 'user-crud', description: 'CRUD operations for users' },
+          { name: 'mcp', description: 'MCP protocol handler' },
+          { name: 'mock-tool-1', description: 'Mock tool 1 for testing' },
+          { name: 'mock-tool-2', description: 'Mock tool 2 for testing' }
+        ] };
+      case 'tools/call':
+        if (payload && payload.tool === 'mock-tool-1') {
+          return { result: 'ok', tool: 'mock-tool-1', output: 'mock-tool-1 executed' };
+        }
+        if (payload && payload.tool === 'mock-tool-2') {
+          return { result: 'ok', tool: 'mock-tool-2', output: 'mock-tool-2 executed' };
+        }
+        return { result: 'ok' };
       case 'capabilities':
         return {
           capabilities: {

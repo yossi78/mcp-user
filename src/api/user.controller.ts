@@ -1,16 +1,38 @@
-import { Controller, Post, Put, Delete, Get, Param, Body, NotFoundException, Logger } from '@nestjs/common';
+import { Controller, Post, Put, Delete, Get, Param, Body, NotFoundException, Logger, Res, HttpStatus } from '@nestjs/common';
 import { UserService } from '../service/user.service';
 
 @Controller('users')
 export class UserController {
   private readonly logger = new Logger(UserController.name);
 
-  constructor(private readonly service: UserService) {}
+  constructor(private readonly service: UserService) { }
 
-  // MCP endpoint only
+  // MCP endpoint: POST /users/mcp accepts any payload
   @Post('mcp')
-  mcpCrud(@Body() body: any): any {
-    this.logger.log('POST MCP operation');
+  mcp(@Body() body: any, @Res() res): any {
+    // Accept both 'operation' and 'method' for compatibility
+    let op = body.operation || body.method;
+    let params = body.payload || body.params;
+    // If neither key is present, treat the whole body as params and default op to 'initialize'
+    if (!op && body && body.initialize !== undefined) {
+      op = 'initialize';
+      params = body;
+    }
+    // If still no op, default to 'initialize' for any POST
+    if (!op) {
+      op = 'initialize';
+      params = {};
+    }
+    const result = this.service.mcpCrudOperation(op, params);
+    // Log for debugging
+    console.log('MCP Request:', { op, params, result });
+    // Always return HTTP 200 and flat JSON
+    return res.status(HttpStatus.ACCEPTED).json(result);
+  }
+
+  @Post()
+  users(@Body() body: any): any {
+    this.logger.log('POST /users/mcp with any payload');
     return this.service.mcpCrudOperation(body.operation, body.payload);
   }
 
