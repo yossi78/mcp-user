@@ -26,7 +26,7 @@ export class UserController {
     const result = this.service.mcpCrudOperation(op, params);
     // Log for debugging
     console.log('MCP Request:', { op, params, result });
-    // Always return HTTP 200 and flat JSON
+    // Always return HTTP 202 and flat JSON
     return res.status(HttpStatus.ACCEPTED).json(result);
   }
 
